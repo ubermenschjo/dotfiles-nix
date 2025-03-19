@@ -20,11 +20,14 @@ in {
       init = {
         defaultBranch = "main";
       };
+      commit = {
+        template = "~/.gitcommit_template";
+      };
       push = {
         autoSetupRemote = true;
       };
       pull = {
-        rebase = true;
+        rebase = false;
       };
     };
   };
@@ -48,9 +51,9 @@ in {
     neofetch
     # utils
     jq
-    k9s
     direnv
     graphviz
+    ripgrep
     # network
     curl
     dnsutils
@@ -61,45 +64,23 @@ in {
     # system
     lsof
     # dev
-	  podman
-	  podman-compose
-	  podman-tui
   ];
 
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestion.enable = true;
-  };
-
-  programs.tmux = {
-    enable = true;
-    clock24 = true;
-	  customPaneNavigationAndResize = true;
-	  mouse = true;
-    shell = "/bin/zsh";
-	  terminal = "xterm-256color";
-
-     plugins = with pkgs.tmuxPlugins; [
-       yank
-       {
-         plugin = dracula;
-         extraConfig = ''
-           set -g @dracula-plugins "cpu-usage git ram-usage network network-bandwidth ssh-session weather time"
-           set -g @dracula-show-battery false
-           set -g @dracula-show-powerline true
-           set -g @dracula-refresh-rate 10
-           set -g @dracula-show-fahrenheit false
-         '';
-       }
-     ];
-
-    extraConfig = ''
+    initExtra = ''
+	            export PATH=/opt/homebrew/bin:$PATH
     '';
   };
-  home.file.".zshrc".text = ''
-	  export PATH=/opt/homebrew/bin:$PATH
-  '';
+
+  home.file.".config/aerospace/eowc.sh" = {
+    source = ./bin/aerospace-window-changed.sh;
+    executable = true;
+  };
+  home.file.".config/ghostty/config".source = ./config/ghostty;
+  home.file.".gitcommit_template".source = ./config/git-commit-template;
   home.file.".bashrc".text = ''
     export POWERLINE_GO_PATH=${POWERLINE_GO_PATH}
     function _update_ps1() {
@@ -109,13 +90,5 @@ in {
     if [ "$TERM" != "linux" ] && [ -f "$POWERLINE_GO_PATH/powerline-go" ]; then
         PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
     fi
-  '';
-  home.file."nsp.sh".source = ./bin/nsp.sh;
-  home.file."nsp.sh".executable = true;
-  home.file.".config/alacritty/alacritty.toml".text = ''
-	[window]
-    option_as_alt = 'OnlyLeft'
-	[terminal]
-  	shell= "/bin/zsh"
   '';
 }

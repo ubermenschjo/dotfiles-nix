@@ -12,8 +12,8 @@
       accordion-padding = 0;
       default-root-container-orientation = "auto";
       automatically-unhide-macos-hidden-apps = false;
-      #on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
       on-focus-changed = [ "move-mouse window-lazy-center" ];
+      #exec-on-workspace-change = ["/Users/doongle/.config/aerospace/eowc.sh"];
       gaps = {
         inner.horizontal = 1;
         inner.vertical = 1;
@@ -23,7 +23,7 @@
         outer.right = 1;
       };
       mode.main.binding = {
-        alt-enter = "exec-and-forget ~/nsp.sh org.alacritty Alacritty";
+        #alt-enter = "exec-and-forget ~/nsp.sh org.alacritty Alacritty";
         # See: https://nikitabobko.github.io/AeroSpace/commands#layout
         alt-slash = "layout tiles horizontal vertical";
         alt-comma = "layout accordion horizontal vertical";
@@ -73,7 +73,7 @@
         alt-u = "workspace U";
         alt-v = "workspace V";
         alt-w = "workspace W";
-        alt-x = "workspace X";
+        # alt-x = "workspace X"; // for emacs
         alt-y = "workspace Y";
         alt-z = "workspace Z";
 
@@ -106,7 +106,7 @@
         alt-shift-u = "move-node-to-workspace U";
         alt-shift-v = "move-node-to-workspace V";
         alt-shift-w = "move-node-to-workspace W";
-        alt-shift-x = "move-node-to-workspace X";
+        # alt-shift-x = "move-node-to-workspace X";
         alt-shift-y = "move-node-to-workspace Y";
         alt-shift-z = "move-node-to-workspace Z";
 

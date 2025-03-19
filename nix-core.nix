@@ -1,6 +1,8 @@
 { lib, config, pkgs, ... }: {
   # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+#services.nix-daemon.enable = true;
+	nix.enable = true;
+
 
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";

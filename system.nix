@@ -27,7 +27,6 @@
       # icon fonts
       material-design-icons
       font-awesome
-      nerdfonts
     ];
   };
 
